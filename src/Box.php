@@ -6,23 +6,41 @@ use App\Abstracts\Animal;
 
 class Box
 {
+    /**
+     * Трейт экскрементов
+     */
     use Waste;
     /**
      * Площадь коробки
      */
     const SQUARE = 10000;
+    /**
+     * @var Цвет коробки
+     */
     protected $colour;
     /**
      * Лимит экскрементов
      */
     const WASTE= 100;
-    protected $storageOfPet = array();
+    /**
+     * @var array Массив животных в коробке
+     */
+    public $storageOfPet = array();
+    /**
+     * @var int
+     * Площадь занятая на текущий момент
+     */
     protected $currentSpace = 0;
     /**
      * @var Количество экскрементов на данный момент
      */
     protected $total;
 
+    /**
+     * Box constructor.
+     * @param $colour
+     * Конструктор коробки с одним свойством - цветом коробки
+     */
     public function __construct($colour)
     {
         $this->colour = $colour;
@@ -30,23 +48,22 @@ class Box
 
     /**
      * @param Animal $animal
+     * @return bool
      * Добавление животных в коробку,
      * проверяем поместится ли животное в коробку.
      * Устанавливаем флаг inBox и занимаем площадь
      */
-    public function addAnimal(Animal $animal)
+    public function addAnimal(Animal $animal):bool
     {
             if (($this->currentSpace + $animal->getVolumeAnimal()) < self::SQUARE) {
                 $animal->setInBox(1);
                 array_push($this->storageOfPet, $animal);
                 $this->currentSpace += $animal->getVolumeAnimal();
+                return true;
             } elseif ($this->currentSpace + $animal->getVolumeAnimal() > self::SQUARE) {
                 $animal->setInBox(0);
-                echo "------------------------------ \n";
-                echo "В коробке больше нет места \n";
-                echo "------------------------------ \n";
+                return false;
             }
-        //inBox = 1, для определения в коробке находится животное или нет
     }
 
     /**
@@ -62,7 +79,6 @@ class Box
                 $this->currentSpace = $this->currentSpace - $animal->getVolumeAnimal();
             }
         }
-        echo "Зверюшка" . " " . $animal->getName() . " " . "успешно удалена! \n";
     }
 
     /**
@@ -71,27 +87,26 @@ class Box
     public function getAnimals():void
     {
         foreach ($this->storageOfPet as $pets) {
-            print_r($pets);
+            $pets;
         }
     }
 
     /**
      * @param Animal $animal
+     * @return bool
      * Проверка, находится ли животное в коробке
      */
-    public function ifInBox(Animal $animal)
+    public function ifInBox(Animal $animal):bool
     {
         if ($animal->getInBox()== 1) {
             $animal->animalEat($animal);
             $animal->ifAnimalToilet();
-            $this->total =  $this->totalWaste() . "\n";
-//            echo $this->total;
+            $this->total =  $this->totalWaste();
             $this->animalToilet();
-//            print_r("Все зверюшки в коробке накормлены \n");
-
+            return true;
         } else {
-            echo "Животное" . " ". $animal->getName()." "."не в коробке, но будет накормлен \n";
             $animal->animalEat($animal);
+            return false;
         }
     }
 
@@ -112,12 +127,13 @@ class Box
     /**
      * Определитель для уборки коробки: когда убраться в коробке
      */
-    public function animalToilet(): void
+    public function animalToilet(): bool
     {
         if ($this->total >= self::WASTE) {
             $this->clearBox();
+            return true;
         } else
-            echo "Еще рано убираться \n";
+            return false;
     }
 
     /**
@@ -125,9 +141,7 @@ class Box
      */
     public function clearBox(): void
     {
-        print_r("Пора убираться! \n");
         $this->setWeightOfWaste(0);
-        echo "============================".$this->total;
     }
 
 }

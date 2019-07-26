@@ -4,23 +4,28 @@ namespace App;
 
 trait Waste
 {
+    /**
+     * @var int
+     * Масса экскрементов на текущий момент
+     */
     protected $weightOfWaste =0;
-    private $waste = 10;
 
-    public function getWaste(): int
-    {
-        return $this->waste;
-    }
-
+    /**
+     * @return int
+     * Так как свойство имеет область видимости protected, для получения ее значения используется getter
+     */
     public function getWeightOfWaste():int
     {
         return $this->weightOfWaste;
     }
 
+    /**
+     * @param $weightOfWaste
+     * Так как свойство имеет область видимости protected, для изменения ее значения используется setter
+     */
     public function setWeightOfWaste($weightOfWaste)
     {
         $this->weightOfWaste = $weightOfWaste;
-//        echo "\n";
     }
 
 }

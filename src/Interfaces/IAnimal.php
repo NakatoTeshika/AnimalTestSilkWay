@@ -20,11 +20,12 @@ interface IAnimal
     /**
      * @param Animal $animal
      * Кормление животных
+     * @return bool
      */
-    public function animalEat(Animal $animal): void;//integer || bool
+    public function animalEat(Animal $animal): bool;
 
     /**
      * Определитель нужно ли в туалет
      */
-    public function ifAnimalToilet(): void;//integer || bool
+    public function ifAnimalToilet(): bool;
 }
