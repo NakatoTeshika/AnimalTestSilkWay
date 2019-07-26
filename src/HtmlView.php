@@ -2,13 +2,15 @@
 
 namespace App;
 
-class HtmlView
+use App\Abstracts\View;
+
+class HtmlView extends View
 {
     /**
      * @param array $arr
      * "View" для index.php - браузер
      */
-    public function htmlView(array $arr)
+    public function view(array $arr)
     {
         echo "Количество животных в коробке " . $arr['animals'] . "<br />";
         echo "Количество кошек в коробке " . $arr['countCatIn'] . "<br />";

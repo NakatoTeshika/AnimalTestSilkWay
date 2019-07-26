@@ -2,13 +2,15 @@
 
 namespace App;
 
-class CliView
+use App\Abstracts\View;
+
+class CliView extends View
 {
     /**
      * @param array $arr
      * "View" для cli.php - консоль
      */
-    public function cliView(array $arr)
+    public function view(array $arr)
     {
         echo "Количество животных в коробке " . $arr['animals'] . "\n";
         echo "Количество животных вне коробки" . $arr['animalsOut'] . "\n";

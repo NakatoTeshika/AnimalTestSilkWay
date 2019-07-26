@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Abstracts\View;
+
 class Application
 {
     /**
@@ -12,7 +14,7 @@ class Application
     /**
      * @return mixed "Запускает" все необходимые функции и возвращает массив значений
      */
-    public function run()
+    public function run(View $view)
     {
         $animals = [
             new Dog("Цезарь","Терьер", "м", "черный", 250, 30, 2, 250),
@@ -87,6 +89,7 @@ class Application
         $output['countCatOut'] = $countCatOut;
         $output['clear'] = $box->animalToilet();
 
-        return $output;
+        return $view->view($output);
     }
+
 }
