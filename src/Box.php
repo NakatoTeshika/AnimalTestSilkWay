@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Abstracts\Animal;
+use App\Traits\Waste;
 
 class Box
 {
@@ -21,7 +22,7 @@ class Box
     /**
      * Лимит экскрементов
      */
-    const WASTE= 100;
+    const WASTE = 100;
     /**
      * @var array Массив животных в коробке
      */
@@ -36,6 +37,13 @@ class Box
      */
     protected $total;
 
+    /**
+     * @return int
+     */
+    public function getCurrentSpace(): int
+    {
+        return $this->currentSpace;
+    }
     /**
      * Box constructor.
      * @param $colour
@@ -121,7 +129,6 @@ class Box
             $count = $count + $pet->getWeightOfWaste();
         }
         return $count;
-
     }
 
     /**

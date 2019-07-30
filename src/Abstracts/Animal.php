@@ -2,9 +2,13 @@
 
 namespace App\Abstracts;
 
-use App\Feed;
+use App\Application;
+use App\Box;
+use App\Cat;
+use App\Dog;
+use App\Traits\Feed;
 use App\Interfaces\IAnimal;
-use App\Waste;
+use App\Traits\Waste;
 
 abstract class Animal implements IAnimal
 {
@@ -62,7 +66,8 @@ abstract class Animal implements IAnimal
     }
 
     /**
-     *Так как свойство имеет область видимости protected, для изменения ее значения используется setter
+     * @param $volumeAnimal
+     * Так как свойство имеет область видимости protected, для изменения ее значения используется setter
      */
     public function setVolumeAnimal($volumeAnimal)
     {
@@ -79,14 +84,14 @@ abstract class Animal implements IAnimal
 
     public function __construct($name, $species, $gender, $animalColour, $maxLevelFood, $currentLevelFood, $age, $volumeAnimal)
     {
-        $this->name = $name;
-        $this->species = $species;
-        $this->gender = $gender;
-        $this->animalColour = $animalColour;
-        $this->maxLevelFood = $maxLevelFood;
+        $this->name             = $name;
+        $this->species          = $species;
+        $this->gender           = $gender;
+        $this->animalColour     = $animalColour;
+        $this->maxLevelFood     = $maxLevelFood;
         $this->currentLevelFood = $currentLevelFood;
-        $this->age = $age;
-        $this->volumeAnimal = $volumeAnimal;
+        $this->age              = $age;
+        $this->volumeAnimal     = $volumeAnimal;
     }
 
     /**
@@ -104,7 +109,9 @@ abstract class Animal implements IAnimal
     abstract public function animalVoice(): void;
 
     /**
-     *Так как свойство имеет область видимости protected, для изменения ее значения используется setter
+     * @param $inBox
+     * Так как свойство имеет область видимости protected, для изменения ее значения используется setter
+     *
      */
     public function setInBox($inBox)
     {
@@ -127,8 +134,7 @@ abstract class Animal implements IAnimal
         } elseif ($animal->currentLevelFood<$animal->maxLevelFood && $animal->inBox == 0) {
               $animal->currentLevelFood += rand(0,$animal->weight($animal));
               return false;
-        } else "Больше корма нет!!!";
-            $this->isHungry($animal);
+        } else $this->isHungry($animal);
     }
 
     /**
@@ -161,4 +167,5 @@ abstract class Animal implements IAnimal
                 return false;
             }
     }
+
 }
