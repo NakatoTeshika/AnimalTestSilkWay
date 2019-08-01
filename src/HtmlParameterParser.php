@@ -2,25 +2,40 @@
 
 namespace App;
 
-use App\Abstracts\Counter;
+use App\Abstracts\ParameterParser;
 
-class HtmlCounter extends Counter
+class HtmlParameterParser extends ParameterParser
 {
     /**
-     * @return array|mixed
-     * Получение значений из браузерной строки используя _GET
+     * @return int
+     * Количество щенят, значение введенное в браузерной строке
      */
-    public function animalCounter()
+    public function getPuppyAmount(): int
     {
-        $count       = [];
         $puppy_count = $_GET['puppy_count'];
+
+        return (int)$puppy_count;
+    }
+
+    /**
+     * @return int
+     * Количество котят, значение введенное в браузерной строке
+     */
+    public function getKittyAmount(): int
+    {
         $kitty_count = $_GET['kitty_count'];
-        if (isset($puppy_count)) {
-            $count['puppy_count'] = $_GET['puppy_count'];
-        }
-        if (isset($kitty_count)) {
-            $count['kitty_count'] = $_GET['kitty_count'];
-        }
-        return $count;
+
+        return  (int)$kitty_count;
+    }
+
+    /**
+     * @return int
+     * Площадь коробки, значение введенное в браузерной строке
+     */
+    public function getBoxVolume(): int
+    {
+        $volumeBox = $_GET['volume_box'];
+
+        return (int)$volumeBox;
     }
 }
