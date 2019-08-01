@@ -6,7 +6,7 @@ namespace App;
 
 use App\Abstracts\Counter;
 
-class CliCounter extends Counter
+class CliParametrParser extends Counter
 {
     /**
      * @return array|mixed
