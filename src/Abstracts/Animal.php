@@ -2,10 +2,6 @@
 
 namespace App\Abstracts;
 
-use App\Application;
-use App\Box;
-use App\Cat;
-use App\Dog;
 use App\Traits\Feed;
 use App\Interfaces\IAnimal;
 use App\Traits\Waste;
@@ -46,7 +42,7 @@ abstract class Animal implements IAnimal
     /**
      * @var int Флаг, который указывает в коробке ли животное
      */
-    protected $inBox = 0;
+    protected $inBox = false;
 
     /**
      *Так как свойство имеет область видимости protected, для получения ее значения используется getter
@@ -58,9 +54,9 @@ abstract class Animal implements IAnimal
 
     /**
      * Так как свойство имеет область видимости protected, для получения ее значения используется getter
-     * @return int
+     * @return bool
      */
-    public function getInBox(): int
+    public function getInBox(): bool
     {
         return $this->inBox;
     }
@@ -150,7 +146,7 @@ abstract class Animal implements IAnimal
         } else {
             return false;
         }
-   }
+    }
 
     /**
      * Функция проверяющая какое животное готово сходить
@@ -167,5 +163,6 @@ abstract class Animal implements IAnimal
                 return false;
             }
     }
+
 
 }
