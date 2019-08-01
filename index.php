@@ -6,6 +6,6 @@ require 'vendor/autoload.php';
 
 $start   = new Application();
 $view    = new HtmlView();
-$counter = new HtmlCounter();
+$counter = new HtmlParameterParser();
 
 $start->run($view,$counter);

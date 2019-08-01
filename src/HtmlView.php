@@ -2,33 +2,40 @@
 
 namespace App;
 
+use App\Abstracts\ParameterParser;
+use App\Abstracts\Presenter;
 use App\Abstracts\View;
+use App\Patterns\BoxPresenter;
+use App\Patterns\OutOfBoxPresenter;
 
 class HtmlView extends View
 {
     /**
-     * @param array $arr
-     * "View" для index.php - браузер
+     * @param BoxPresenter $boxPresenter
+     * @param OutOfBoxPresenter $outOfBoxPresenter
+     * Вывод всех сообщений в формате HTML
      */
-    public function view(array $arr)
+    public function view(BoxPresenter $boxPresenter, OutOfBoxPresenter $outOfBoxPresenter)
     {
-        echo "Количество животных в коробке "   . $arr['animals']           . "<br />";
-        echo "Количество кошек в коробке "      . $arr['countCatIn']        . "<br />";
-        echo "Количество собак в коробке "      . $arr['countDogIn']        . "<br />";
-        echo "Количество кошек вне коробки "    . $arr['countCatOut']       . "<br />";
-        echo "Количество собак вне коробки "    . $arr['countDogOut']       . "<br />";
-        echo "Количество сытых в коробке "      . $arr['countNotHungryIn']  . "<br />";
-        echo "Количество голодных в коробке "   . $arr['countHungryIn']     . "<br />";
-        echo "Количество голодных вне коробки " . $arr['countHungryOut']    . "<br />";
-        echo "Количество сытых вне коробки "    . $arr['countNotHungryOut'] . "<br />";
-        echo "=================================================================== " . "<br />";
-        echo "Было добавлено собак = " .$arr['addedDog']. " не было добавлено = " . $arr['notAddedDog'] ."<br/>";
-        echo "Было добавлено кошек = " .$arr['addedCat']. " не было добавлено = " . $arr['notAddedCat'] ."<br/>";
-        echo "=================================================================== <br/>";
-        echo (int)$arr['newSpaceCat'] . " столько котиков может поместиться в коробку <br/>";
-        echo (int)$arr['newSpaceDog'] . " столько щеночков может поместиться в коробку <br/>";
-        if($arr['clear'] == true) {
-            echo "Пора убираться!";
-        } else echo "Не надо убираться!";
+        echo $boxPresenter->animalCount() . "<br />";
+        echo $outOfBoxPresenter->animalCount()        . "<br />";
+        echo $boxPresenter->countCat()        . "<br />";
+        echo $boxPresenter->countDog()       . "<br />";
+        echo $outOfBoxPresenter->countCat()       . "<br />";
+        echo $outOfBoxPresenter->countDog()      . "<br />";
+        echo $boxPresenter->countNotHungry()  . "<br />";
+        echo $boxPresenter->countHungry()   . "<br />";
+        echo $outOfBoxPresenter->countHungry()  . "<br />";
+        echo $outOfBoxPresenter->countNotHungry() . "<br />";
+        echo "=================================================================== <br />";
+        echo $boxPresenter->countIsAddCat() . $outOfBoxPresenter->countIsAddCat() ."<br />";
+        echo $boxPresenter->countIsAddDog(). $outOfBoxPresenter->countIsAddDog() ."<br />";
+        echo "=================================================================== <br />";
+        echo $boxPresenter->spaceForCat(). "<br />";
+        echo $boxPresenter->spaceForDog() . "<br />";
+        echo "=================================================================== <br />";
+        if ($boxPresenter->messageClear()) {
+            echo $boxPresenter->messageClearBox() . "<br />";
+        } else echo $boxPresenter->messageNotClear() . "<br />";
     }
 }
