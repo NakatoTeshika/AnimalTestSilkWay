@@ -110,6 +110,7 @@ class Box implements ICounter
      */
     public function animalToiletIn():bool
     {
+//        var_dump($this->wasteBox);
         foreach ($this->storageOfPet as $animal)
         {
             $animal->ifAnimalToilet();
@@ -128,13 +129,20 @@ class Box implements ICounter
         }
     }
 
+
     /**
      * Определитель для уборки коробки: когда убраться в коробке
      * @return bool
      */
     public function animalWaste()
     {
-        if(count($this->wasteBox) == count($this->storageOfPet)) {
+       if(array_reduce($this->wasteBox,  function ($val1,$val2) {
+               $val1 += $val2->getWeightOfWaste()->getWeightOfFeed();
+
+               return $val1;
+
+           } ) > self::WASTE) {
+//        if(count($this->wasteBox) == count($this->storageOfPet)) {
             return true;
         } else
         return false;
