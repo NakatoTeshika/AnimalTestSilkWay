@@ -9,14 +9,14 @@ use App\Interfaces\IFactory;
 class BoxFactory implements IFactory
 {
     /**
-     * @param ParameterParser $counter
+     * @param $parameter
      * @return Box|mixed
      * Создание коробки с заданной пользователем площадью коробки
      */
-    static public function create(ParameterParser $counter)
+    static public function create($parameter)
     {
         $colourOfBox = ["Зеленая","Красная","Черная","Синяя"];
-        $volumeOfBox = $counter->getBoxVolume();
+        $volumeOfBox = $parameter;
         $box = new Box($colourOfBox[array_rand($colourOfBox,1)], $volumeOfBox);
         return $box;
     }
