@@ -15,10 +15,4 @@ interface ICounter
      * Подсчитывает количество голодных и сытых в коробке и вне коробки
      */
     public function countIsNotHungry();
-
-    /**
-     * @return mixed
-     * Подсчитывает количество животных по типу - кошка и собака, в коробке и вне коробки
-     */
-    public function typeAnimalInOutBox();
 }

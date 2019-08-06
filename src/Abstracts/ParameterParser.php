@@ -8,13 +8,13 @@ abstract class ParameterParser
      * @return int
      * Количество щенков, параметр получаемый от пользователя(из консоли или браузерной строки)
      */
-    abstract public function getPuppyAmount():int;
+    abstract public function getPuppyCount():int;
 
     /**
      * @return int
      * Количество котят, параметр получаемый от пользователя(из консоли или браузерной строки)
      */
-    abstract public function getKittyAmount():int ;
+    abstract public function getKittyCount():int ;
 
     /**
      * @return int

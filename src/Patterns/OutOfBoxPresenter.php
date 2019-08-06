@@ -57,8 +57,8 @@ class OutOfBoxPresenter extends Presenter
      */
     public function countCat()
     {
-        $typeAnimalCount= $this->outOfBox->typeAnimalInOutBox();
-        $countCat =  "Количество кошек вне коробки "      . $typeAnimalCount['countCatOut'];
+        $typeAnimalCount= $this->outOfBox->countIsAdd();
+        $countCat =  "Количество кошек вне коробки "      . $typeAnimalCount['notAddedCat'];
         return $countCat;
     }
 
@@ -68,8 +68,8 @@ class OutOfBoxPresenter extends Presenter
      */
     public function countDog()
     {
-        $typeAnimalCount= $this->outOfBox->typeAnimalInOutBox();
-        $countDog =  "Количество собак вне коробки "      . $typeAnimalCount['countDogOut'];
+        $typeAnimalCount= $this->outOfBox->countIsAdd();
+        $countDog =  "Количество собак вне коробки "      . $typeAnimalCount['notAddedDog'];
         return $countDog;
     }
 
