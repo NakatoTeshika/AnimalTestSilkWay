@@ -16,4 +16,12 @@ class Feed
     {
         $this->weightOfFeed = $weightOfFeed;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getWeightOfFeed()
+    {
+        return $this->weightOfFeed;
+    }
 }
