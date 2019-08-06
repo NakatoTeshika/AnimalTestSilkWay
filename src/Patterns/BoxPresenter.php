@@ -24,7 +24,7 @@ class BoxPresenter extends Presenter
 
     public function __construct($box,$parameter)
     {
-        $this->box = $box;
+        $this->box       = $box;
         $this->parameter = $parameter;
     }
 
@@ -35,7 +35,8 @@ class BoxPresenter extends Presenter
     public function animalCount(): string
     {
         $countAnimals = count($this->box->storageOfPet);
-        $animals = "Количество животных в коробке " . $countAnimals;
+        $animals      = "Количество животных в коробке " . $countAnimals;
+
         return $animals;
     }
 
@@ -46,7 +47,8 @@ class BoxPresenter extends Presenter
     public function countIsAddCat():string
     {
         $countAnimals = $this->box->countIsAdd();
-        $addToBoxCat = "Было добавлено кошек = " .$countAnimals['addedCat'];
+        $addToBoxCat  = "Было добавлено кошек = " . $countAnimals['addedCat'];
+
         return $addToBoxCat;
     }
 
@@ -57,7 +59,8 @@ class BoxPresenter extends Presenter
     public function countIsAddDog():string
     {
         $countAnimals = $this->box->countIsAdd();
-        $addToBoxDog = "Было добавлено собак = " .$countAnimals['addedDog'];
+        $addToBoxDog  = "Было добавлено собак = " .$countAnimals['addedDog'];
+
         return $addToBoxDog;
     }
 
@@ -67,9 +70,10 @@ class BoxPresenter extends Presenter
      */
     public function countCat()
     {
-        $typeAnimalCount= $this->box->countIsAdd();
-       $countCat =  "Количество кошек в коробке "      . $typeAnimalCount['addedCat'];
-       return $countCat;
+        $typeAnimalCount = $this->box->countIsAdd();
+        $countCat        =  "Количество кошек в коробке "      . $typeAnimalCount['addedCat'];
+
+        return $countCat;
     }
 
     /**
@@ -78,8 +82,9 @@ class BoxPresenter extends Presenter
      */
     public function countDog()
     {
-        $typeAnimalCount= $this->box->countIsAdd();
-        $countDog =  "Количество собак в коробке "      . $typeAnimalCount['addedDog'];
+        $typeAnimalCount = $this->box->countIsAdd();
+        $countDog        =  "Количество собак в коробке "      . $typeAnimalCount['addedDog'];
+
         return $countDog;
     }
 
@@ -90,7 +95,8 @@ class BoxPresenter extends Presenter
     public function countNotHungry()
     {
         $countHungryOrNot = $this->box->countIsNotHungry();
-        $countNotHungry = "Количество сытых в коробке "      . $countHungryOrNot['countNotHungryIn'];
+        $countNotHungry   = "Количество сытых в коробке "      . $countHungryOrNot['countNotHungryIn'];
+
         return $countNotHungry;
     }
 
@@ -101,7 +107,8 @@ class BoxPresenter extends Presenter
     public function countHungry()
     {
         $countHungryOrNot = $this->box->countIsNotHungry();
-        $countHungry = "Количество голодный в коробке " . $countHungryOrNot['countHungryIn'];
+        $countHungry      = "Количество голодный в коробке " . $countHungryOrNot['countHungryIn'];
+
         return $countHungry;
     }
 
@@ -112,7 +119,8 @@ class BoxPresenter extends Presenter
     public function spaceForCat()
     {
         $enoughPlace = $this->box->enoughPlace();
-        $space = (int)$enoughPlace['newSpaceCat'] . " столько котиков может поместиться в коробку";
+        $space       = (int)$enoughPlace['newSpaceCat'] . " столько котиков может поместиться в коробку";
+
         return $space;
     }
 
@@ -123,7 +131,8 @@ class BoxPresenter extends Presenter
     public function spaceForDog()
     {
         $enoughPlace = $this->box->enoughPlace();
-        $space = (int)$enoughPlace['newSpaceDog'] . " столько щенят может поместиться в коробку";
+        $space       = (int)$enoughPlace['newSpaceDog'] . " столько щенят может поместиться в коробку";
+
         return $space;
     }
 
@@ -136,7 +145,7 @@ class BoxPresenter extends Presenter
         if ($this->box->animalWaste()) {
             return "Пора убираться!";
         } else {
-                return "Не надо убираться!";
+            return "Не надо убираться!";
         }
     }
 }

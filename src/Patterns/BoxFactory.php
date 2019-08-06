@@ -17,7 +17,8 @@ class BoxFactory implements IFactory
     {
         $colourOfBox = ["Зеленая","Красная","Черная","Синяя"];
         $volumeOfBox = $parameter;
-        $box = new Box($colourOfBox[array_rand($colourOfBox,1)], $volumeOfBox);
+        $box         = new Box($colourOfBox[array_rand($colourOfBox,1)], $volumeOfBox);
+
         return $box;
     }
 }

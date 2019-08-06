@@ -14,4 +14,12 @@ class Waste
     {
         $this->weightOfWaste = $weightOfWaste;
     }
+
+    /**
+     * @return int
+     */
+    public function getWeightOfWaste()
+    {
+        return $this->weightOfWaste;
+    }
 }

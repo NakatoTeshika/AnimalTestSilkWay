@@ -25,7 +25,8 @@ class OutOfBoxPresenter extends Presenter
     public function animalCount(): string
     {
         $countAnimals = count($this->outOfBox->storageOfPetOut);
-        $animals = "Количество животных вне коробки " . $countAnimals;
+        $animals      = "Количество животных вне коробки " . $countAnimals;
+
         return $animals;
     }
 
@@ -36,7 +37,8 @@ class OutOfBoxPresenter extends Presenter
     public function countIsAddCat():string
     {
         $countAnimals = $this->outOfBox->countIsAdd();
-        $addToBoxCat = "не добавлено кошек = " .$countAnimals['notAddedCat'];
+        $addToBoxCat  = "не добавлено кошек = " .$countAnimals['notAddedCat'];
+
         return $addToBoxCat;
     }
 
@@ -47,7 +49,8 @@ class OutOfBoxPresenter extends Presenter
     public function countIsAddDog():string
     {
         $countAnimals = $this->outOfBox->countIsAdd();
-        $addToBoxDog = "не добавлено собак = " .$countAnimals['notAddedDog'];
+        $addToBoxDog  = "не добавлено собак = " .$countAnimals['notAddedDog'];
+
         return $addToBoxDog;
     }
 
@@ -57,8 +60,9 @@ class OutOfBoxPresenter extends Presenter
      */
     public function countCat()
     {
-        $typeAnimalCount= $this->outOfBox->countIsAdd();
-        $countCat =  "Количество кошек вне коробки "      . $typeAnimalCount['notAddedCat'];
+        $typeAnimalCount = $this->outOfBox->countIsAdd();
+        $countCat        =  "Количество кошек вне коробки "      . $typeAnimalCount['notAddedCat'];
+
         return $countCat;
     }
 
@@ -68,8 +72,9 @@ class OutOfBoxPresenter extends Presenter
      */
     public function countDog()
     {
-        $typeAnimalCount= $this->outOfBox->countIsAdd();
-        $countDog =  "Количество собак вне коробки "      . $typeAnimalCount['notAddedDog'];
+        $typeAnimalCount = $this->outOfBox->countIsAdd();
+        $countDog        =  "Количество собак вне коробки "      . $typeAnimalCount['notAddedDog'];
+
         return $countDog;
     }
 
@@ -80,7 +85,8 @@ class OutOfBoxPresenter extends Presenter
     public function countNotHungry()
     {
         $countHungryOrNot = $this->outOfBox->countIsNotHungry();
-        $countNotHungry = "Количество сытых вне коробки "      . $countHungryOrNot['countNotHungryOut'];
+        $countNotHungry   = "Количество сытых вне коробки "      . $countHungryOrNot['countNotHungryOut'];
+
         return $countNotHungry;
     }
 
@@ -90,8 +96,9 @@ class OutOfBoxPresenter extends Presenter
      */
     public function countHungry()
     {
-        $countHungryOrNot =$this->outOfBox->countIsNotHungry();
-        $countHungry = "Количество голодных вне коробки " . $countHungryOrNot['countHungryOut'];
+        $countHungryOrNot = $this->outOfBox->countIsNotHungry();
+        $countHungry      = "Количество голодных вне коробки " . $countHungryOrNot['countHungryOut'];
+
         return $countHungry;
     }
 }

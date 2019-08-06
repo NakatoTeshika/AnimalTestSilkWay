@@ -14,15 +14,18 @@ class Box implements ICounter
      * Площадь коробки
      */
     protected $volumeOfBox;
+
     /**
      * @var
      * Цвет коробки
      */
     protected $colour;
+
     /**
      * Лимит экскрементов
      */
     const WASTE = 15;
+
     /**
      * @var array Массив животных в коробке
      */
@@ -33,12 +36,17 @@ class Box implements ICounter
      * Площадь занятая на текущий момент
      */
     protected $currentSpace = 0;
+
     /**
      * @var
      * Количество экскрементов на данный момент
      */
     protected $total;
 
+    /**
+     * @var array
+     * Экскременты в коробке
+     */
     protected $wasteBox = [];
 
     /**
@@ -49,7 +57,7 @@ class Box implements ICounter
      */
     public function __construct($colour, $volumeOfBox)
     {
-        $this->colour = $colour;
+        $this->colour      = $colour;
         $this->volumeOfBox = $volumeOfBox;
     }
 
@@ -97,12 +105,12 @@ class Box implements ICounter
     }
 
     /**
-     * @param Feed $feed
      * @return bool
-     * Кормление животных и проверка необходимо ли им в туалет
+     * проверка необходимо ли им в туалет
      */
     public function animalToiletIn():bool
     {
+//        var_dump($this->wasteBox);
         foreach ($this->storageOfPet as $animal)
         {
             $animal->ifAnimalToilet();
@@ -112,9 +120,7 @@ class Box implements ICounter
     }
 
     /**
-     * Определитель для уборки коробки: когда убраться в коробке
-     * @param Waste $waste
-     * @return bool
+     * Поход в  туалет
      */
     public function animalToilet()
     {
@@ -123,9 +129,20 @@ class Box implements ICounter
         }
     }
 
+
+    /**
+     * Определитель для уборки коробки: когда убраться в коробке
+     * @return bool
+     */
     public function animalWaste()
     {
-        if(count($this->wasteBox) == count($this->storageOfPet)) {
+       if(array_reduce($this->wasteBox,  function ($val1,$val2) {
+               $val1 += $val2->getWeightOfWaste()->getWeightOfFeed();
+
+               return $val1;
+
+           } ) > self::WASTE) {
+//        if(count($this->wasteBox) == count($this->storageOfPet)) {
             return true;
         } else
         return false;

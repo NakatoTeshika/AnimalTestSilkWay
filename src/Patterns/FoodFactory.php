@@ -17,13 +17,14 @@ class FoodFactory implements IFactory
     static public function create($parameter)
     {
         $feed = [];
-        while($parameter>0)
-        {
+
+        while ($parameter>0) {
             $weightOfFeed = 150;
+
             array_push($feed, new Feed($weightOfFeed));
+
             $parameter--;
         }
-
         return $feed;
     }
 }
