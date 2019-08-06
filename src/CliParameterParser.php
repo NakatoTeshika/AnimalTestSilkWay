@@ -25,7 +25,8 @@ class CliParameterParser extends ParameterParser
 //            'volume_feed:'
         ];
         $count = getopt('', $variable);
-        if(isset($count['puppy_count'])) {
+
+        if (isset($count['puppy_count'])) {
             $this->puppy_count = $count['puppy_count'];
         }
         if (isset($count['kitty_count'])) {

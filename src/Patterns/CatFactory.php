@@ -15,13 +15,13 @@ class CatFactory implements IFactory
      */
     static public function create($parameter)
     {
-        $cats = array();
-        $name = ["Пушок","Белка","Синька","Зеленка","Несси","Васька","Том","Джерри","Скотт"];
-        $species = ["Мейн кун", "Сфинкс", "Британская", "Шотландская", "Бирманская", "Бурма","Норвежская"];
-        $genders = ["м","ж"];
+        $cats         = array();
+        $name         = ["Пушок","Белка","Синька","Зеленка","Несси","Васька","Том","Джерри","Скотт"];
+        $species      = ["Мейн кун", "Сфинкс", "Британская", "Шотландская", "Бирманская", "Бурма","Норвежская"];
+        $genders      = ["м","ж"];
         $animalColour = ["Белый",'черный','серый','рыжий','коричневый', 'пыльно-серый'];
-        $stomach = array();
-        $limitKitty = $parameter;
+        $stomach      = array();
+        $limitKitty   = $parameter;
         while($limitKitty>0)
         {
             array_push($cats, new Cat($name[array_rand($name,1)], $species[array_rand($species, 1)],

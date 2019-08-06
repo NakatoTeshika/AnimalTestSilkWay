@@ -2,7 +2,6 @@
 
 namespace App\Interfaces;
 
-use App\Abstracts\Animal;
 use App\Traits\Feed;
 use App\Traits\Waste;
 
@@ -27,7 +26,6 @@ interface IAnimal
 
     /**
      * Определитель нужно ли в туалет
-     * @param Waste $waste
      * @return bool
      */
     public function ifAnimalToilet();

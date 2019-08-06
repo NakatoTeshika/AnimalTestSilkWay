@@ -13,18 +13,18 @@ abstract class Animal implements IAnimal
      * Желудок животного
      */
     protected $stomachAnimal = array();
+
     /**
-     * Трейт корма
-     */
-    /**
-     * Трейт экскрементов
+     * Имя животного
      */
     protected $name;
+
     /**
      * @var
      * Порода зверюшки
      */
     protected $species;
+
     /**
      * @var
      * Пол зверюшки
@@ -40,21 +40,19 @@ abstract class Animal implements IAnimal
      * Максимальное количество еды, которое может принять животное(лимит сытости)
      */
     protected $maxLevelFood;
-//    /**
-//     * @var
-//     * Текущий уровень сытости
-//     */
-//    protected $currentLevelFood = 0;
+
     /**
      * @var
      * Возраст животного
      */
     protected $age;
+
     /**
      * @var
      * Площадь занимаемая животным
      */
     protected $volumeAnimal;
+
     /**
      * @var int Флаг, который указывает в коробке ли животное
      */
