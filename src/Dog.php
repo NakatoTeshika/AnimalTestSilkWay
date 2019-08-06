@@ -14,8 +14,4 @@ class Dog extends Animal
         echo "гав гав гав";
     }
 
-
-
-
-
 }

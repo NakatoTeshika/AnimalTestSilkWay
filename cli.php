@@ -6,7 +6,7 @@ require 'vendor/autoload.php';
 
 $start   = new Application();
 $view    = new CliView();
-$counter = new CliParameterParser();
+$parameter = new CliParameterParser();
 
-$start->run($view, $counter);
+$start->run($view, $parameter);
 

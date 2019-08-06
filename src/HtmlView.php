@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Abstracts\ParameterParser;
-use App\Abstracts\Presenter;
 use App\Abstracts\View;
 use App\Patterns\BoxPresenter;
 use App\Patterns\OutOfBoxPresenter;
@@ -18,14 +16,14 @@ class HtmlView extends View
     public function view(BoxPresenter $boxPresenter, OutOfBoxPresenter $outOfBoxPresenter)
     {
         echo $boxPresenter->animalCount() . "<br />";
-        echo $outOfBoxPresenter->animalCount()        . "<br />";
-        echo $boxPresenter->countCat()        . "<br />";
-        echo $boxPresenter->countDog()       . "<br />";
-        echo $outOfBoxPresenter->countCat()       . "<br />";
-        echo $outOfBoxPresenter->countDog()      . "<br />";
-        echo $boxPresenter->countNotHungry()  . "<br />";
-        echo $boxPresenter->countHungry()   . "<br />";
-        echo $outOfBoxPresenter->countHungry()  . "<br />";
+        echo $outOfBoxPresenter->animalCount() . "<br />";
+        echo $boxPresenter->countCat() . "<br />";
+        echo $boxPresenter->countDog() . "<br />";
+        echo $outOfBoxPresenter->countCat() . "<br />";
+        echo $outOfBoxPresenter->countDog() . "<br />";
+        echo $boxPresenter->countNotHungry() . "<br />";
+        echo $boxPresenter->countHungry() . "<br />";
+        echo $outOfBoxPresenter->countHungry() . "<br />";
         echo $outOfBoxPresenter->countNotHungry() . "<br />";
         echo "=================================================================== <br />";
         echo $boxPresenter->countIsAddCat() . $outOfBoxPresenter->countIsAddCat() ."<br />";
@@ -34,8 +32,6 @@ class HtmlView extends View
         echo $boxPresenter->spaceForCat(). "<br />";
         echo $boxPresenter->spaceForDog() . "<br />";
         echo "=================================================================== <br />";
-        if ($boxPresenter->messageClear()) {
-            echo $boxPresenter->messageClearBox() . "<br />";
-        } else echo $boxPresenter->messageNotClear() . "<br />";
+        echo $boxPresenter->messageClear() . "<br />";
     }
 }

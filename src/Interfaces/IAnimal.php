@@ -3,6 +3,8 @@
 namespace App\Interfaces;
 
 use App\Abstracts\Animal;
+use App\Traits\Feed;
+use App\Traits\Waste;
 
 interface IAnimal
 {
@@ -18,14 +20,15 @@ interface IAnimal
     public function animalCreep(): bool;
 
     /**
-     * @param Animal $animal
-     * Кормление животных
+     * @param Feed $feed
      * @return bool
      */
-    public function animalEat(Animal $animal): bool;
+    public function animalEat(Feed $feed): bool;
 
     /**
      * Определитель нужно ли в туалет
+     * @param Waste $waste
+     * @return bool
      */
-    public function ifAnimalToilet(): bool;
+    public function ifAnimalToilet();
 }

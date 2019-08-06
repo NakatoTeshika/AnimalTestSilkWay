@@ -6,6 +6,7 @@ namespace App\Patterns;
 use App\Abstracts\BoxOrNot;
 use App\Abstracts\Presenter;
 use App\Interfaces\IPresenter;
+use App\Traits\Waste;
 
 class BoxPresenter extends Presenter
 {
@@ -66,8 +67,8 @@ class BoxPresenter extends Presenter
      */
     public function countCat()
     {
-        $typeAnimalCount= $this->box->typeAnimalInOutBox();
-       $countCat =  "Количество кошек в коробке "      . $typeAnimalCount['countCatIn'];
+        $typeAnimalCount= $this->box->countIsAdd();
+       $countCat =  "Количество кошек в коробке "      . $typeAnimalCount['addedCat'];
        return $countCat;
     }
 
@@ -77,8 +78,8 @@ class BoxPresenter extends Presenter
      */
     public function countDog()
     {
-        $typeAnimalCount= $this->box->typeAnimalInOutBox();
-        $countDog =  "Количество собак в коробке "      . $typeAnimalCount['countDogIn'];
+        $typeAnimalCount= $this->box->countIsAdd();
+        $countDog =  "Количество собак в коробке "      . $typeAnimalCount['addedDog'];
         return $countDog;
     }
 
@@ -110,7 +111,7 @@ class BoxPresenter extends Presenter
      */
     public function spaceForCat()
     {
-        $enoughPlace = $this->box->enoughPlace($this->parameter);
+        $enoughPlace = $this->box->enoughPlace();
         $space = (int)$enoughPlace['newSpaceCat'] . " столько котиков может поместиться в коробку";
         return $space;
     }
@@ -121,7 +122,7 @@ class BoxPresenter extends Presenter
      */
     public function spaceForDog()
     {
-        $enoughPlace = $this->box->enoughPlace($this->parameter);
+        $enoughPlace = $this->box->enoughPlace();
         $space = (int)$enoughPlace['newSpaceDog'] . " столько щенят может поместиться в коробку";
         return $space;
     }
@@ -132,28 +133,10 @@ class BoxPresenter extends Presenter
      */
     public function messageClear()
     {
-        return $this->box->animalToilet();
+        if ($this->box->animalWaste()) {
+            return "Пора убираться!";
+        } else {
+                return "Не надо убираться!";
+        }
     }
-
-    /**
-     * @return string
-     * Возвращает сообщение, что нужно убраться
-     */
-    public function messageClearBox()
-    {
-        $clean = "Пора убираться!";
-        return $clean;
-    }
-
-    /**
-     * @return string
-     * Возвращает сообщение,что убираться не нужно
-     */
-    public function messageNotClear()
-    {
-        $notClean = "Не надо убираться!";
-        return $notClean;
-    }
-
-
 }

@@ -7,9 +7,9 @@ use App\Abstracts\ParameterParser;
 interface IFactory
 {
     /**
-     * @param ParameterParser $counter
+     * @param $parameter
      * @return mixed
      * Создание животных и коробки
      */
-   static public function create(ParameterParser $counter);
+   static public function create($parameter);
 }

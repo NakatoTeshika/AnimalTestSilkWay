@@ -4,22 +4,16 @@ namespace App\Traits;
 
 use App\Abstracts\Animal;
 
-trait Feed
+class Feed
 {
     /**
      * @var
      * Текушая масса корма
      */
-    protected $weightOfFeed;
+    protected $weightOfFeed = 0;
 
-    /**
-     * @param Animal $animal
-     * @return int
-     * Масса максимально скормленного корма животным - вызывается в animalEat, используется в random - max
-     */
-    public function weight(Animal $animal):int
+    public function __construct($weightOfFeed)
     {
-        $this->weightOfFeed = $animal->maxLevelFood-$animal->currentLevelFood;
-        return $this->weightOfFeed;
+        $this->weightOfFeed = $weightOfFeed;
     }
 }

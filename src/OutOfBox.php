@@ -11,8 +11,12 @@ class OutOfBox implements ICounter
     /**
      * @var array Массив животных вне коробки
      */
-    public $storageOfPetOut = array();
+    public $storageOfPetOut  = array();
 
+    /**
+     * @var array Массив для хранения экскременов
+     */
+    protected $wasteOutOfBox = array();
     /**
      * @param Animal $animal
      * @return bool
@@ -22,8 +26,7 @@ class OutOfBox implements ICounter
     {
         $animal->setInBox(false);
         array_push($this->storageOfPetOut,$animal);
-
-        return false;
+        return true;
     }
 
     /**
@@ -58,9 +61,9 @@ class OutOfBox implements ICounter
         $countHungryOut    = 0;
 
         foreach ($this->storageOfPetOut as $animal) {
-            if ($animal->isHungry($animal) == true && $animal->getInBox()==0) {
+            if ($animal->isHungry() == false) {
                 $countNotHungryOut++;
-            } elseif ($animal->isHungry($animal) == false && $animal->getInBox()==0) {
+            } elseif ($animal->isHungry() == true) {
                 $countHungryOut++;
             }
         }
@@ -68,30 +71,10 @@ class OutOfBox implements ICounter
         return ['countNotHungryOut'=>$countNotHungryOut, 'countHungryOut'=>$countHungryOut];
     }
 
-    /**
-     * @return array
-     * Количество голодных животных вне коробки
-     */
-    public function typeAnimalInOutBox()
-    {
-        $countDogOut = 0;
-        $countCatOut = 0;
-
-        foreach ($this->storageOfPetOut as $animal) {
-            if (get_class($animal) == Dog::class && $animal->getInBox() == 0) {
-                $countDogOut++;
-            } else if (get_class($animal) == Cat::class && $animal->getInBox() == 0) {
-                $countCatOut++;
-            }
-        }
-
-        return ['countDogOut'=>$countDogOut, 'countCatOut'=>$countCatOut];
-    }
-
-    public function animalEat()
+    public function animalToilet()
     {
         foreach ($this->storageOfPetOut as $animal) {
-            $animal->animalEat($animal);
+            $this->wasteOutOfBox = array_merge($this->wasteOutOfBox, $animal->ifAnimalToilet());
         }
     }
 }
