@@ -2,30 +2,16 @@
 
 namespace App\Traits;
 
-trait Waste
+class Waste
 {
     /**
      * @var int
      * Масса экскрементов на текущий момент
      */
-    protected $weightOfWaste =0;
+    protected $weightOfWaste;
 
-    /**
-     * @return int
-     * Так как свойство имеет область видимости protected, для получения ее значения используется getter
-     */
-    public function getWeightOfWaste():int
-    {
-        return $this->weightOfWaste;
-    }
-
-    /**
-     * @param $weightOfWaste
-     * Так как свойство имеет область видимости protected, для изменения ее значения используется setter
-     */
-    public function setWeightOfWaste($weightOfWaste)
+    public function __construct($weightOfWaste)
     {
         $this->weightOfWaste = $weightOfWaste;
     }
-
 }
