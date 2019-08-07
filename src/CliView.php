@@ -2,17 +2,16 @@
 
 namespace App;
 
-use App\Abstracts\BoxOrNot;
 use App\Abstracts\View;
-use App\Patterns\BoxPresenter;
-use App\Patterns\OutOfBoxPresenter;
+use App\Presenter\BoxPresenter;
+use App\Presenter\OutOfBoxPresenter;
 
 class CliView extends View
 {
     /**
+     * Вывод всех сообщений
      * @param BoxPresenter $boxPresenter
      * @param OutOfBoxPresenter $outOfBoxPresenter
-     * Вывод всех сообщений
      */
     public function view(BoxPresenter $boxPresenter, OutOfBoxPresenter $outOfBoxPresenter)
     {

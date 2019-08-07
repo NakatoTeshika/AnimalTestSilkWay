@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Traits;
+namespace App;
 
 class Waste
 {
     /**
-     * @var int
      * Масса экскрементов на текущий момент
+     * @var int
      */
     protected $weightOfWaste;
 
@@ -16,6 +16,8 @@ class Waste
     }
 
     /**
+     * Так как область видимости protected, для того чтобы получить значение
+     * используем getter и возвращаем значение weightOfWaste
      * @return int
      */
     public function getWeightOfWaste()

@@ -1,18 +1,16 @@
 <?php
 
-
-namespace App\Patterns;
-
+namespace App\Factory;
 
 use App\Interfaces\IFactory;
-use App\Traits\Feed;
+use App\Feed;
 
 class FoodFactory implements IFactory
 {
     /**
+     * Создание порции корма
      * @param $parameter
      * @return mixed
-     * Создание порции корма
      */
     static public function create($parameter)
     {

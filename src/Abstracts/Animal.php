@@ -2,15 +2,15 @@
 
 namespace App\Abstracts;
 
-use App\Traits\Feed;
+use App\Feed;
 use App\Interfaces\IAnimal;
-use App\Traits\Waste;
+use App\Waste;
 
 abstract class Animal implements IAnimal
 {
     /**
-     * @var array
      * Желудок животного
+     * @var array
      */
     protected $stomachAnimal = array();
 
@@ -20,41 +20,44 @@ abstract class Animal implements IAnimal
     protected $name;
 
     /**
-     * @var
      * Порода зверюшки
+     * @var
      */
     protected $species;
 
     /**
-     * @var
      * Пол зверюшки
+     * @var
      */
     protected $gender;
+
     /**
-     * @var
      * Цвет животного
+     * @var
      */
     protected $animalColour;
+
     /**
-     * @var
      * Максимальное количество еды, которое может принять животное(лимит сытости)
+     * @var
      */
     protected $maxLevelFood;
 
     /**
-     * @var
      * Возраст животного
+     * @var
      */
     protected $age;
 
     /**
-     * @var
      * Площадь занимаемая животным
+     * @var
      */
     protected $volumeAnimal;
 
     /**
-     * @var int Флаг, который указывает в коробке ли животное
+     * Флаг, который указывает в коробке ли животное
+     * @var int
      */
     protected $inBox = false;
 
@@ -66,7 +69,18 @@ abstract class Animal implements IAnimal
         return $this->volumeAnimal;
     }
 
-    public function __construct($name, $species, $gender, $animalColour, $maxLevelFood, $age, $volumeAnimal, $stomachAnimal)
+    /**
+     * Конструктор зверюшки
+     * Animal constructor.
+     * @param $name
+     * @param $species
+     * @param $gender
+     * @param $animalColour
+     * @param $maxLevelFood
+     * @param $age
+     * @param $volumeAnimal
+     */
+    public function __construct($name, $species, $gender, $animalColour, $maxLevelFood, $age, $volumeAnimal)
     {
         $this->name             = $name;
         $this->species          = $species;
@@ -75,12 +89,11 @@ abstract class Animal implements IAnimal
         $this->maxLevelFood     = $maxLevelFood;
         $this->age              = $age;
         $this->volumeAnimal     = $volumeAnimal;
-        $this->stomachAnimal    = $stomachAnimal;
     }
 
     /**
-     * @return bool
      * Функция ползает ли животное, возвращает true, так как и те и другие ползают
+     * @return bool
      */
     public function animalCreep(): bool
     {
@@ -90,12 +103,11 @@ abstract class Animal implements IAnimal
     /**
      * Функция какой звук издает животное. Реализуется в классах Cat и Dog
      */
-    abstract public function animalVoice(): void;
+    abstract public function animalVoice(): string ;
 
     /**
-     * @param $inBox
      * Так как свойство имеет область видимости protected, для изменения ее значения используется setter
-     *
+     * @param $inBox
      */
     public function setInBox($inBox)
     {
@@ -103,44 +115,42 @@ abstract class Animal implements IAnimal
     }
 
     /**
-     * @param Feed $feed
-     * @return bool
      * Функция кормления животных, сравнивает значения текущего уровня сытости и максимального,
      * и св-во в коробке ли животное
      * ->
      * к текущему уровню сытости прибавляем рандомное число
+     * @param Feed $feed
+     * @return bool
      */
     public function animalEat(Feed $feed):bool
     {
         array_push($this->stomachAnimal, $feed);
         $this->isHungry();
+
         return true;
     }
 
     /**
-     *
      * Проверка голодное ли животное
      * @return bool
-     *
      */
     public function isHungry()
     {
-        if(count($this->stomachAnimal)!=0)
-        {
+        if (count($this->stomachAnimal)!=0) {
             return false;
-        }
-        else return true;
+        } else
+            return true;
     }
 
     /**
-     * Функция проверяющая какое животное готово сходить
-     * в туалет(необходимо, чтобы текущее значение еды
-     * было равно, либо превышало значение maxLevel(максимальное количество еды))
+     * Функция проверяющая какое животное готово сходить в туалет и если готово добавляет в массив - экскременты
+     * @return array
      */
-    public function ifAnimalToilet()
+    public function ifAnimalToilet():array
     {
         $wasteArray = array();
-        if(!$this->isHungry()) {
+
+        if (!$this->isHungry()) {
             array_push($wasteArray, new Waste(array_pop($this->stomachAnimal)));
         }
         return $wasteArray;

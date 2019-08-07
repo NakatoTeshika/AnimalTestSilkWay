@@ -6,31 +6,51 @@ use App\Abstracts\ParameterParser;
 
 class HtmlParameterParser extends ParameterParser
 {
+    /**
+     * Количество щенят
+     * @var int
+     */
     protected $puppy_count = 0;
 
+    /**
+     * Количество котят
+     * @var int
+     */
     protected $kitty_count = 0;
 
-    protected $volumeBox = 0;
+    /**
+     * Площадь коробки
+     * @var int
+     */
+    protected $volumeBox   = 0;
 
+    /**
+     * Присваиваем определенные параметры, используя функцию returnParameter()
+     * HtmlParameterParser constructor.
+     */
     public function __construct()
     {
-        if (isset($_GET['puppy_count'])) {
-            $this->puppy_count = $_GET['puppy_count'];
-        }
-        if (isset($_GET['kitty_count'])) {
-            $this->puppy_count = $_GET['kitty_count'];
-        }
-        if (isset($_GET['volume_box'])) {
-            $this->puppy_count = $_GET['volume_box'];
-        }
+        $this->puppy_count = $this->returnParameter('puppy_count');
+        $this->kitty_count = $this->returnParameter('kitty_count');
+        $this->volumeBox   = $this->returnParameter('volume_box');
     }
 
     /**
+     * Возвращает значения параметров
+     * @param $parameter
      * @return int
-     * Количество щенят, значение введенное в браузерной строке
      */
+    public function returnParameter($parameter):int
+    {
+        if (isset($_GET[$parameter])) {
+             $_GET[$parameter];
+        }
+        return $_GET[$parameter];
+    }
+
     /**
-     * @return int|mixed
+     * Количество щенят, значение введенное в браузерной строке
+     * @return int
      */
     public function getPuppyCount():int
     {
@@ -38,10 +58,7 @@ class HtmlParameterParser extends ParameterParser
     }
 
     /**
-     * @return int
      * Количество котят, значение введенное в браузерной строке
-     */
-    /**
      * @return int
      */
     public function getKittyCount(): int
@@ -50,10 +67,7 @@ class HtmlParameterParser extends ParameterParser
     }
 
     /**
-     * @return int
      * Площадь коробки, значение введенное в браузерной строке
-     */
-    /**
      * @return int
      */
     public function getBoxVolume(): int

@@ -4,21 +4,18 @@ namespace App;
 
 use App\Abstracts\ParameterParser;
 use App\Abstracts\View;
-use App\Patterns\BoxFactory;
-use App\Patterns\BoxPresenter;
-use App\Patterns\CatFactory;
-use App\Patterns\DogFactory;
-use App\Patterns\FoodFactory;
-use App\Patterns\OutOfBoxPresenter;
+use App\Factory\BoxFactory;
+use App\Presenter\BoxPresenter;
+use App\Factory\CatFactory;
+use App\Factory\DogFactory;
+use App\Factory\FoodFactory;
+use App\Presenter\OutOfBoxPresenter;
 
 class Application
 {
     /**
-     * @return mixed "Запускает" все необходимые функции и возвращает массив значений
-     */
-    /**
-     * @param View $view
      * "Запускает" все необходимые функции
+     * @param View $view
      * @param ParameterParser $parameter
      * @return void
      */
@@ -29,13 +26,14 @@ class Application
         $cats              = CatFactory::create($parameter->getKittyCount());
         $feeds             = FoodFactory::create($parameter->getPuppyCount()+$parameter->getKittyCount());
         $animals           = array_merge($dogs, $cats);
+
         $boxPresenter      = new BoxPresenter($box,$parameter);
         $outOfBox          = new OutOfBox();
         $outOfBoxPresenter = new OutOfBoxPresenter($outOfBox);
         $insert            = new AddAnimal();
 
         shuffle($animals);
-        $insert->addToSomewhere($box,$outOfBox,$animals);
+        $insert->addTo($box,$outOfBox,$animals);
 
         foreach ($animals as $animal) {
             $animal->animalEat(array_pop($feeds));
@@ -43,8 +41,7 @@ class Application
 
         $box->animalToilet();
         $outOfBox->animalToilet();
-        $box->animalToiletIn();
-        $view->view($boxPresenter, $outOfBoxPresenter);
         $box->clear();
+        $view->view($boxPresenter, $outOfBoxPresenter);
     }
 }

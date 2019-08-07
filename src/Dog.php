@@ -9,9 +9,9 @@ class Dog extends Animal
     /**
      * Звуки издаваемые собакой
      */
-    public function animalVoice(): void
+    public function animalVoice(): string
     {
-        echo "гав гав гав";
+        return "гав гав гав";
     }
 
 }

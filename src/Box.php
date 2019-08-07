@@ -3,12 +3,8 @@
 namespace App;
 
 use App\Abstracts\Animal;
-use App\Abstracts\ParameterParser;
-use App\Interfaces\ICounter;
-use App\Traits\Feed;
-use App\Traits\Waste;
 
-class Box implements ICounter
+class Box
 {
     /**
      * Площадь коробки
@@ -16,71 +12,60 @@ class Box implements ICounter
     protected $volumeOfBox;
 
     /**
-     * @var
-     * Цвет коробки
-     */
-    protected $colour;
-
-    /**
      * Лимит экскрементов
      */
-    const WASTE = 15;
+    const WASTE = 150;
 
     /**
-     * @var array Массив животных в коробке
+     * Массив животных в коробке
+     * @var array
      */
     public $storageOfPet = array();
 
     /**
-     * @var int
      * Площадь занятая на текущий момент
+     * @var int
      */
     protected $currentSpace = 0;
 
     /**
-     * @var
-     * Количество экскрементов на данный момент
-     */
-    protected $total;
-
-    /**
-     * @var array
      * Экскременты в коробке
+     * @var array
      */
-    protected $wasteBox = [];
+    public $wasteBox = [];
 
     /**
      * Box constructor.
-     * @param $colour
-     * Конструктор коробки с одним свойством - цветом коробки
      * @param $volumeOfBox
      */
-    public function __construct($colour, $volumeOfBox)
+    public function __construct($volumeOfBox)
     {
-        $this->colour      = $colour;
         $this->volumeOfBox = $volumeOfBox;
     }
 
     /**
-     * @param Animal $animal
-     * @return bool
      * Добавление животных в коробку,
      * проверяем поместится ли животное в коробку.
      * Устанавливаем флаг inBox и занимаем площадь
+     * @param Animal $animal
+     * @return bool
      */
     public function addAnimal(Animal $animal):bool
     {
             if (($this->currentSpace + $animal->getVolumeAnimal()) < $this->volumeOfBox) {
                 $animal->setInBox(true);
                 array_push($this->storageOfPet, $animal);
+
                 $this->currentSpace += $animal->getVolumeAnimal();
+
                 return true;
-            } else return false;
+            } else
+                return false;
     }
 
     /**
-     * @param Animal $animal
      * Функция для вытаскивания животного из коробки
+     * @param Animal $animal
      */
     public function takeAnimal(Animal $animal)
     {
@@ -88,10 +73,10 @@ class Box implements ICounter
             if ($value == $animal) {
                 unset($this->storageOfPet[$key]);
                 $animal->setInBox(0);
+
                 $this->currentSpace = $this->currentSpace - $this->volumeOfBox;
             }
         }
-
     }
 
     /**
@@ -105,21 +90,6 @@ class Box implements ICounter
     }
 
     /**
-     * @return bool
-     * проверка необходимо ли им в туалет
-     */
-    public function animalToiletIn():bool
-    {
-//        var_dump($this->wasteBox);
-        foreach ($this->storageOfPet as $animal)
-        {
-            $animal->ifAnimalToilet();
-
-        }
-        return true;
-    }
-
-    /**
      * Поход в  туалет
      */
     public function animalToilet()
@@ -128,7 +98,6 @@ class Box implements ICounter
             $this->wasteBox = array_merge($this->wasteBox, $animal->ifAnimalToilet());
         }
     }
-
 
     /**
      * Определитель для уборки коробки: когда убраться в коробке
@@ -140,12 +109,11 @@ class Box implements ICounter
                $val1 += $val2->getWeightOfWaste()->getWeightOfFeed();
 
                return $val1;
-
-           } ) > self::WASTE) {
-//        if(count($this->wasteBox) == count($this->storageOfPet)) {
+           }) > self::WASTE) {
             return true;
-        } else
-        return false;
+        } else {
+           return false;
+       }
     }
 
     /**
@@ -163,65 +131,100 @@ class Box implements ICounter
      */
     public function clearBox()
     {
-        unset($this->wasteBox);
+        $this->wasteBox = [];
     }
 
     /**
-     * @return array
-     * Количество голодных и сытых в коробке
+     * Количество голодных в коробке
+     * @return int
      */
-    public function countIsNotHungry(): array
+    public function countIsHungry(): int
+    {
+        $countHungry = 0;
+
+        foreach ($this->storageOfPet as $animal) {
+            if ($animal->isHungry($animal) == true) {
+                $countHungry++;
+            }
+        }
+        return $countHungry;
+    }
+
+    /**
+     * Количество сытых в коробке
+     * @return int
+     */
+    public function countIsNotHungry():int
     {
         $countNotHungry = 0;
-        $countHungry    = 0;
 
         foreach ($this->storageOfPet as $animal) {
             if ($animal->isHungry($animal) == false) {
                 $countNotHungry++;
-            } elseif ($animal->isHungry($animal) == true) {
-                $countHungry++;
             }
         }
-        return ['countNotHungryIn'=>$countNotHungry, 'countHungryIn'=>$countHungry];
+        return $countNotHungry;
     }
 
     /**
+     * Количество кошек в коробке. Сколько было добавлено
      * @return array|mixed
-     * Количество кошек и собак в коробке - не общее число, а по виду животного. Сколько было добавлено
      */
-    public function countIsAdd()
+    public function catsAddedCount()
     {
-        $addedDog    = 0;
-        $addedCat    = 0;
+        $addedCat = 0;
+
+        foreach ($this->storageOfPet as $animal) {
+            if (is_a($animal,Cat::class)) {
+                $addedCat++;
+            }
+        }
+        return $addedCat;
+    }
+
+    /**
+     * Количество собак в коробке. Сколько было добавлено
+     * @return int
+     */
+    public function dogsAddedCount()
+    {
+        $addedDog = 0;
 
         foreach ($this->storageOfPet as $animal) {
             if (is_a($animal, Dog::class)) {
                 $addedDog++;
             }
-            if(is_a($animal,Cat::class)) {
-                $addedCat++;
-            }
         }
-        return ['addedDog'=>$addedDog, 'addedCat'=>$addedCat];
+        return $addedDog;
     }
 
     /**
-     * @return array
-     * Количество животных помещающихся в коробку
+     * Количество животных помещающихся в коробку - собак
+     * @return float|int
      */
-    public function enoughPlace()
+    public function placeForDog():int
     {
-        $newSpaceCat = 0;
-        $newSpaceDog = 0;
+        $howDogsFit = 0;
+
+        if ($this->volumeOfBox - $this->currentSpace < $this->volumeOfBox && Dog::class) {
+            $howDogsFit = $this->volumeOfBox - $this->currentSpace;
+            $howDogsFit =$howDogsFit / 1100;
+        }
+        return $howDogsFit;
+    }
+
+    /**
+     * Количество животных помещающихся в коробку - кошек
+     * @return int
+     */
+    public function placeForCat():int
+    {
+        $howCatsFit = 0;
 
         if ($this->volumeOfBox - $this->currentSpace < $this->volumeOfBox && Cat::class) {
-            $newSpaceCat = $this->volumeOfBox - $this->currentSpace;
-            $newSpaceCat = $newSpaceCat / 1000;
+            $howCatsFit = $this->volumeOfBox - $this->currentSpace;
+            $howCatsFit = $howCatsFit / 1000;
         }
-        if ($this->volumeOfBox - $this->currentSpace < $this->volumeOfBox && Dog::class) {
-            $newSpaceDog = $this->volumeOfBox - $this->currentSpace;
-            $newSpaceDog = $newSpaceDog / 1100;
-        }
-        return ['newSpaceCat'=>$newSpaceCat, 'newSpaceDog'=>$newSpaceDog];
+        return $howCatsFit;
     }
 }

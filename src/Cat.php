@@ -9,10 +9,8 @@ class Cat extends Animal
     /**
      * Звуки издаваемые кошкой
      */
-    public function animalVoice(): void
+    public function animalVoice(): string
     {
-        echo "мяу мяу мяу";
+        return "мяу мяу мяу";
     }
-
-
 }

@@ -1,24 +1,21 @@
 <?php
 
+namespace App\Presenter;
 
-namespace App\Patterns;
-
-use App\Abstracts\BoxOrNot;
 use App\Abstracts\Presenter;
-use App\Interfaces\IPresenter;
-use App\Traits\Waste;
+use App\Waste;
 
 class BoxPresenter extends Presenter
 {
     /**
-     * @var
      * "Объект" класса Box
+     * @var
      */
     protected $box;
 
     /**
-     * @var
      * "Объект" класса ParameterParser
+     * @var
      */
     protected $parameter;
 
@@ -29,8 +26,8 @@ class BoxPresenter extends Presenter
     }
 
     /**
-     * @return string
      * Возвращает количество животных в коробке
+     * @return string
      */
     public function animalCount(): string
     {
@@ -41,111 +38,103 @@ class BoxPresenter extends Presenter
     }
 
     /**
-     * @return string
      * Возвращает сколько кошек было добавлено в коробку
+     * @return string
      */
     public function countIsAddCat():string
     {
-        $countAnimals = $this->box->countIsAdd();
-        $addToBoxCat  = "Было добавлено кошек = " . $countAnimals['addedCat'];
+        $addToBoxCat = "Было добавлено кошек = " . $this->box->catsAddedCount();
 
         return $addToBoxCat;
     }
 
     /**
-     * @return string
      * Возвращает сколько собак было добавлено в коробку
+     * @return string
      */
     public function countIsAddDog():string
     {
-        $countAnimals = $this->box->countIsAdd();
-        $addToBoxDog  = "Было добавлено собак = " .$countAnimals['addedDog'];
+        $addToBoxDog = "Было добавлено собак = " . $this->box->dogsAddedCount();
 
         return $addToBoxDog;
     }
 
     /**
-     * @return mixed|string
      * Возравщает количество кошек в коробке
+     * @return mixed|string
      */
     public function countCat()
     {
-        $typeAnimalCount = $this->box->countIsAdd();
-        $countCat        =  "Количество кошек в коробке "      . $typeAnimalCount['addedCat'];
+        $countCat = "Количество кошек в коробке " . $this->box->catsAddedCount();
 
         return $countCat;
     }
 
     /**
-     * @return mixed|string
      * Возвращает количество собак в коробке
+     * @return mixed|string
      */
     public function countDog()
     {
-        $typeAnimalCount = $this->box->countIsAdd();
-        $countDog        =  "Количество собак в коробке "      . $typeAnimalCount['addedDog'];
+        $countDog = "Количество собак в коробке " . $this->box->dogsAddedCount();
 
         return $countDog;
     }
 
     /**
-     * @return mixed|string
      * Возвращает количество животных, которые сыты
+     * @return mixed|string
      */
     public function countNotHungry()
     {
-        $countHungryOrNot = $this->box->countIsNotHungry();
-        $countNotHungry   = "Количество сытых в коробке "      . $countHungryOrNot['countNotHungryIn'];
+        $countNotHungry = "Количество сытых в коробке " . $this->box->countIsNotHungry();
 
         return $countNotHungry;
     }
 
     /**
-     * @return mixed|string
      * Возвращает количество животных, которые голодны
+     * @return mixed|string
      */
     public function countHungry()
     {
-        $countHungryOrNot = $this->box->countIsNotHungry();
-        $countHungry      = "Количество голодный в коробке " . $countHungryOrNot['countHungryIn'];
+        $countHungry = "Количество голодных в коробке " . $this->box->countIsHungry();
 
         return $countHungry;
     }
 
     /**
-     * @return string
      * Возвращает сколько еще котиков может поместиться в коробку
+     * @return string
      */
     public function spaceForCat()
     {
-        $enoughPlace = $this->box->enoughPlace();
-        $space       = (int)$enoughPlace['newSpaceCat'] . " столько котиков может поместиться в коробку";
+        $space = (int)$this->box->placeForCat() . " столько котиков может поместиться в коробку";
 
         return $space;
     }
 
     /**
-     * @return string
      * Возвращает сколько еще щеночков может поместиться в коробку
+     * @return string
      */
     public function spaceForDog()
     {
-        $enoughPlace = $this->box->enoughPlace();
-        $space       = (int)$enoughPlace['newSpaceDog'] . " столько щенят может поместиться в коробку";
+        $space = (int)$this->box->placeForDog() . " столько щенят может поместиться в коробку";
 
         return $space;
     }
 
     /**
-     * @return mixed
      * Возвращает результат выполнения animalToilet()
+     * @return mixed
      */
     public function messageClear()
     {
         if ($this->box->animalWaste()) {
             return "Пора убираться!";
         } else {
-            return "Не надо убираться!";
+            return "Не надо убираться! Уже убрано!";
         }
     }
 }
