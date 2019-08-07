@@ -1,25 +1,25 @@
 <?php
 
-
-namespace App\Patterns;
+namespace App\Presenter;
 
 use App\Abstracts\Presenter;
 
 class OutOfBoxPresenter extends Presenter
 {
     /**
-     * @var
      * "Объект" класса OutOfBox
+     * @var
      */
     protected $outOfBox;
+
     public function __construct($outOfBox)
     {
         $this->outOfBox = $outOfBox;
     }
 
     /**
-     * @return string
      * Возвращает количество животных вне коробки
+     * @return string
      */
     public function animalCount(): string
     {
@@ -30,73 +30,67 @@ class OutOfBoxPresenter extends Presenter
     }
 
     /**
-     * @return string
      * Возвращает сколько кошек вне коробки - не добавлено
+     * @return string
      */
     public function countIsAddCat():string
     {
-        $countAnimals = $this->outOfBox->countIsAdd();
-        $addToBoxCat  = "не добавлено кошек = " .$countAnimals['notAddedCat'];
+        $addToBoxCat  = " не добавлено кошек = " . $this->outOfBox->catsNotAdd();
 
         return $addToBoxCat;
     }
 
     /**
-     * @return string
      * Возвращает сколько собак вне коробки - не добавлено
+     * @return string
      */
     public function countIsAddDog():string
     {
-        $countAnimals = $this->outOfBox->countIsAdd();
-        $addToBoxDog  = "не добавлено собак = " .$countAnimals['notAddedDog'];
+        $addToBoxDog  = " не добавлено собак = " . $this->outOfBox->dogsNotAdd();
 
         return $addToBoxDog;
     }
 
     /**
-     * @return mixed|string
      * Возравщает количество кошек вне коробки
+     * @return mixed|string
      */
     public function countCat()
     {
-        $typeAnimalCount = $this->outOfBox->countIsAdd();
-        $countCat        =  "Количество кошек вне коробки "      . $typeAnimalCount['notAddedCat'];
+        $countCat = "Количество кошек вне коробки " . $this->outOfBox->catsNotAdd();
 
         return $countCat;
     }
 
     /**
-     * @return mixed|string
      * Возвращает количество собак вне коробки
+     * @return mixed|string
      */
     public function countDog()
     {
-        $typeAnimalCount = $this->outOfBox->countIsAdd();
-        $countDog        =  "Количество собак вне коробки "      . $typeAnimalCount['notAddedDog'];
+        $countDog = "Количество собак вне коробки " . $this->outOfBox->dogsNotAdd();
 
         return $countDog;
     }
 
     /**
-     * @return mixed|string
      * Возвращает количество животных, которые сыты вне коробки
+     * @return mixed|string
      */
     public function countNotHungry()
     {
-        $countHungryOrNot = $this->outOfBox->countIsNotHungry();
-        $countNotHungry   = "Количество сытых вне коробки "      . $countHungryOrNot['countNotHungryOut'];
+        $countNotHungry = "Количество сытых вне коробки " . $this->outOfBox->countIsNotHungry();
 
         return $countNotHungry;
     }
 
     /**
-     * @return mixed|string
      * Возвращает количество животных, которые голодны вне коробки
+     * @return mixed|string
      */
     public function countHungry()
     {
-        $countHungryOrNot = $this->outOfBox->countIsNotHungry();
-        $countHungry      = "Количество голодных вне коробки " . $countHungryOrNot['countHungryOut'];
+        $countHungry = "Количество голодных вне коробки " . $this->outOfBox->countIsHungry();
 
         return $countHungry;
     }
