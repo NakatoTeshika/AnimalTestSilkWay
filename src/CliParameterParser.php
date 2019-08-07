@@ -1,48 +1,62 @@
 <?php
 
-
 namespace App;
-
 
 use App\Abstracts\ParameterParser;
 
 class CliParameterParser extends ParameterParser
 {
+    /**
+     * Количество щенят
+     * @var int
+     */
     protected $puppy_count = 0;
+
+    /**
+     * Количество котят
+     * @var int
+     */
     protected $kitty_count = 0;
+
+    /**
+     * Площадь коробки
+     * @var int
+     */
     protected $volume_box  = 0;
 
     /**
-     * @return array|mixed
-     * Получение значений из консоли в виде массива, используя getopt()
+     * Используя функцию returnParameter() возвращаем значения параметров для собак, кошек и коробки. Полученные значения
+     * присваиваем переменным.
      */
     public function __construct()
+    {
+        $this->puppy_count = $this->returnParameter('puppy_count');
+        $this->kitty_count = $this->returnParameter('kitty_count');
+        $this->volume_box  = $this->returnParameter('volume_box');
+    }
+
+    /**
+     * Возвращает параметры вводимые пользователем - количество щенят, котят и площадь коробки
+     * @param $parameter
+     * @return int
+     */
+    public function returnParameter($parameter):int
     {
         $variable = [
             'puppy_count:',
             'kitty_count:',
             'volume_box:'
-//            'volume_feed:'
         ];
-        $count = getopt('', $variable);
+        $count    = getopt('', $variable);
 
-        if (isset($count['puppy_count'])) {
-            $this->puppy_count = $count['puppy_count'];
+        if (isset($count[$parameter])) {
+            $count[$parameter];
         }
-        if (isset($count['kitty_count'])) {
-            $this->kitty_count = $count['kitty_count'];
-        }
-        if (isset($count['volume_box'])) {
-            $this->volume_box  = $count['volume_box'];
-        }
+        return $count[$parameter];
     }
 
-
     /**
-     * @return int
      * Количество щенят, заданных пользователем
-     */
-    /**
      * @return int
      */
     public function getPuppyCount(): int
@@ -51,10 +65,7 @@ class CliParameterParser extends ParameterParser
     }
 
     /**
-     * @return int
      * Количество котят, заданных пользователем
-     */
-    /**
      * @return int
      */
     public function getKittyCount(): int
@@ -63,15 +74,11 @@ class CliParameterParser extends ParameterParser
     }
 
     /**
-     * @return int
      * Площадь коробки, заданная пользователем
-     */
-    /**
      * @return int
      */
     public function getBoxVolume(): int
     {
         return $this->volume_box;
     }
-
 }
