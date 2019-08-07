@@ -5,7 +5,8 @@ namespace App\Patterns;
 
 
 use App\Interfaces\IFactory;
-use App\Traits\Feed;
+use App\Feed;
+
 
 class FoodFactory implements IFactory
 {

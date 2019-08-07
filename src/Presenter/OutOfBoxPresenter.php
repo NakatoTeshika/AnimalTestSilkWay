@@ -4,7 +4,6 @@
 namespace App\Patterns;
 
 use App\Abstracts\Presenter;
-use App\Interfaces\IPresenter;
 
 class OutOfBoxPresenter extends Presenter
 {

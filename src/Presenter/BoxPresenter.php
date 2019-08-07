@@ -3,10 +3,8 @@
 
 namespace App\Patterns;
 
-use App\Abstracts\BoxOrNot;
 use App\Abstracts\Presenter;
-use App\Interfaces\IPresenter;
-use App\Traits\Waste;
+use App\Waste;
 
 class BoxPresenter extends Presenter
 {
