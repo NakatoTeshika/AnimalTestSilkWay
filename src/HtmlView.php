@@ -3,35 +3,38 @@
 namespace App;
 
 use App\Abstracts\View;
-use App\Patterns\BoxPresenter;
-use App\Patterns\OutOfBoxPresenter;
+use App\Presenter\BoxPresenter;
+use App\Presenter\OutOfBoxPresenter;
 
 class HtmlView extends View
 {
     /**
+     * Вывод всех сообщений в формате HTML
      * @param BoxPresenter $boxPresenter
      * @param OutOfBoxPresenter $outOfBoxPresenter
-     * Вывод всех сообщений в формате HTML
      */
     public function view(BoxPresenter $boxPresenter, OutOfBoxPresenter $outOfBoxPresenter)
     {
-        echo $boxPresenter->animalCount() . "<br />";
-        echo $outOfBoxPresenter->animalCount() . "<br />";
-        echo $boxPresenter->countCat() . "<br />";
-        echo $boxPresenter->countDog() . "<br />";
-        echo $outOfBoxPresenter->countCat() . "<br />";
-        echo $outOfBoxPresenter->countDog() . "<br />";
-        echo $boxPresenter->countNotHungry() . "<br />";
-        echo $boxPresenter->countHungry() . "<br />";
-        echo $outOfBoxPresenter->countHungry() . "<br />";
-        echo $outOfBoxPresenter->countNotHungry() . "<br />";
-        echo "=================================================================== <br />";
-        echo $boxPresenter->countIsAddCat() . $outOfBoxPresenter->countIsAddCat() ."<br />";
-        echo $boxPresenter->countIsAddDog(). $outOfBoxPresenter->countIsAddDog() ."<br />";
-        echo "=================================================================== <br />";
-        echo $boxPresenter->spaceForCat(). "<br />";
-        echo $boxPresenter->spaceForDog() . "<br />";
-        echo "=================================================================== <br />";
-        echo $boxPresenter->messageClear() . "<br />";
+        echo '<body background="https://img5.goodfon.ru/wallpaper/nbig/5/c0/koshki-sobaki-shchenki-kotiata-chetvero-belyi-fon.jpg">';
+        echo '<center>';
+        echo '<em><h2 style="color: peru">Зверюшки</h2></em>';
+        echo '<table border="2" bgcolor="#f5f5dc">';
+        echo '<tr><td>' . $boxPresenter->animalCount() . '</td></tr>';
+        echo '<tr><td>' . $outOfBoxPresenter->animalCount() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->countCat() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->countDog() . '</td></tr>';
+        echo '<tr><td>' . $outOfBoxPresenter->countCat() . '</td></tr>';
+        echo '<tr><td>' . $outOfBoxPresenter->countDog() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->countNotHungry() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->countHungry() . '</td></tr>';
+        echo '<tr><td>' . $outOfBoxPresenter->countHungry() . '</td></tr>';
+        echo '<tr><td>' . $outOfBoxPresenter->countNotHungry() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->countIsAddCat() . $outOfBoxPresenter->countIsAddCat() .'</td></tr>';
+        echo '<tr><td>' . $boxPresenter->countIsAddDog(). $outOfBoxPresenter->countIsAddDog() . '</td></td>';
+        echo '<tr><td>' . $boxPresenter->spaceForCat() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->spaceForDog() . '</td></tr>';
+        echo '<tr><td>' . $boxPresenter->messageClear() . '</td></tr>';
+        echo '</table></center>';
+        echo '</body>';
     }
 }
