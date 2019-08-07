@@ -2,14 +2,12 @@
 
 namespace App\Interfaces;
 
-use App\Abstracts\ParameterParser;
-
 interface IFactory
 {
     /**
+     * Создание животных и коробки
      * @param $parameter
      * @return mixed
-     * Создание животных и коробки
      */
    static public function create($parameter);
 }

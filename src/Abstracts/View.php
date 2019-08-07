@@ -2,16 +2,16 @@
 
 namespace App\Abstracts;
 
-use App\Patterns\BoxPresenter;
-use App\Patterns\OutOfBoxPresenter;
+use App\Presenter\BoxPresenter;
+use App\Presenter\OutOfBoxPresenter;
 
 abstract class View
 {
     /**
+     *Отображение результатов выполнения функций
      * @param BoxPresenter $boxPresenter
      * @param OutOfBoxPresenter $outOfBoxPresenter
      * @return mixed
-     * Отображение результатов выполнения функций
      */
     abstract public function view(BoxPresenter $boxPresenter, OutOfBoxPresenter $outOfBoxPresenter);
 }

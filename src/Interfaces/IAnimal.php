@@ -2,23 +2,23 @@
 
 namespace App\Interfaces;
 
-use App\Traits\Feed;
-use App\Traits\Waste;
+use App\Feed;
 
 interface IAnimal
 {
     /**
      * Какие звуки издает
      */
-    public function animalVoice(): void;
+    public function animalVoice(): string;
 
     /**
-     * @return bool
      * Ползает ли животное
+     * @return bool
      */
     public function animalCreep(): bool;
 
     /**
+     * Умение потреблять корм
      * @param Feed $feed
      * @return bool
      */

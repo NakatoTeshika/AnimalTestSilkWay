@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Traits;
-
-use App\Abstracts\Animal;
+namespace App;
 
 class Feed
 {
     /**
-     * @var
      * Текушая масса корма
+     * @var
      */
     protected $weightOfFeed = 0;
 
@@ -18,6 +16,8 @@ class Feed
     }
 
     /**
+     * Так как область видимости protected, для того чтобы получить значение
+     * используем getter и возвращаем значение weightOfFeed
      * @return mixed
      */
     public function getWeightOfFeed()
