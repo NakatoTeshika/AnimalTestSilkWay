@@ -22,7 +22,13 @@ class HtmlParameterParser extends ParameterParser
      * Площадь коробки
      * @var int
      */
-    protected $volumeBox   = 0;
+    protected $volume_box   = 0;
+
+    /**
+     * Массив наименований входных параметров
+     * @var array
+     */
+    protected $parameters = ['puppy_count', 'kitty_count', 'volume_box'];
 
     /**
      * Присваиваем определенные параметры, используя функцию returnParameter()
@@ -30,23 +36,22 @@ class HtmlParameterParser extends ParameterParser
      */
     public function __construct()
     {
-        $this->puppy_count = $this->returnParameter('puppy_count');
-        $this->kitty_count = $this->returnParameter('kitty_count');
-        $this->volumeBox   = $this->returnParameter('volume_box');
+        foreach ($this->parameters as $parameter) {
+            $this->$parameter = $this->returnParameter($parameter);
+        }
     }
 
     /**
-     * Возвращает значения параметров
+     * Возвращает значения параметров введеных пользователем, либо возвращает значение по умолчанию
      * @param $parameter
      * @return int
      */
-    public function returnParameter($parameter):int
-    {
-        if (isset($_GET[$parameter])) {
-             $_GET[$parameter];
-        }
-        return $_GET[$parameter];
-    }
+     public function returnParameter($parameter):int
+     {
+         if (property_exists(self::class, $parameter) && isset($_GET[$parameter])) {
+             return $_GET[$parameter];
+         } else return Config::get($parameter);
+     }
 
     /**
      * Количество щенят, значение введенное в браузерной строке
@@ -72,6 +77,6 @@ class HtmlParameterParser extends ParameterParser
      */
     public function getBoxVolume(): int
     {
-        return $this->volumeBox;
+        return $this->volume_box;
     }
 }
