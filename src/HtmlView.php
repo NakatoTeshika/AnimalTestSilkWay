@@ -34,7 +34,8 @@ class HtmlView extends View
         echo '<tr><td>' . $boxPresenter->spaceForCat() . '</td></tr>';
         echo '<tr><td>' . $boxPresenter->spaceForDog() . '</td></tr>';
         echo '<tr><td>' . $boxPresenter->messageClear() . '</td></tr>';
-        echo '</table></center>';
+        echo '</table>';
+        echo '</center>';
         echo '</body>';
     }
 }
