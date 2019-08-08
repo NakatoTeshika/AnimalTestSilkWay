@@ -50,7 +50,8 @@ class HtmlParameterParser extends ParameterParser
      {
          if (property_exists(self::class, $parameter) && isset($_GET[$parameter])) {
              return $_GET[$parameter];
-         } else return Config::get($parameter);
+         } else
+             return Config::get($parameter);
      }
 
     /**
