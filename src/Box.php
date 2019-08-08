@@ -14,7 +14,7 @@ class Box
     /**
      * Лимит экскрементов
      */
-    const WASTE = 150;
+    static $WASTE;
 
     /**
      * Массив животных в коробке
@@ -41,6 +41,7 @@ class Box
     public function __construct($volumeOfBox)
     {
         $this->volumeOfBox = $volumeOfBox;
+        self::$WASTE = Config::get('waste');
     }
 
     /**
@@ -53,7 +54,6 @@ class Box
     public function addAnimal(Animal $animal):bool
     {
             if (($this->currentSpace + $animal->getVolumeAnimal()) < $this->volumeOfBox) {
-                $animal->setInBox(true);
                 array_push($this->storageOfPet, $animal);
 
                 $this->currentSpace += $animal->getVolumeAnimal();
@@ -72,7 +72,6 @@ class Box
         foreach ($this->storageOfPet as $key=>$value) {
             if ($value == $animal) {
                 unset($this->storageOfPet[$key]);
-                $animal->setInBox(0);
 
                 $this->currentSpace = $this->currentSpace - $this->volumeOfBox;
             }
@@ -109,7 +108,7 @@ class Box
                $val1 += $val2->getWeightOfWaste()->getWeightOfFeed();
 
                return $val1;
-           }) > self::WASTE) {
+           }) > self::$WASTE) {
             return true;
         } else {
            return false;
