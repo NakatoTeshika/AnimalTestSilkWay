@@ -56,12 +56,6 @@ abstract class Animal implements IAnimal
     protected $volumeAnimal;
 
     /**
-     * Флаг, который указывает в коробке ли животное
-     * @var int
-     */
-    protected $inBox = false;
-
-    /**
      *Так как свойство имеет область видимости protected, для получения ее значения используется getter
      */
     public function getVolumeAnimal()
@@ -104,15 +98,6 @@ abstract class Animal implements IAnimal
      * Функция какой звук издает животное. Реализуется в классах Cat и Dog
      */
     abstract public function animalVoice(): string ;
-
-    /**
-     * Так как свойство имеет область видимости protected, для изменения ее значения используется setter
-     * @param $inBox
-     */
-    public function setInBox($inBox)
-    {
-        $this->inBox = $inBox;
-    }
 
     /**
      * Функция кормления животных, сравнивает значения текущего уровня сытости и максимального,
