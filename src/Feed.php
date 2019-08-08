@@ -8,7 +8,7 @@ class Feed
      * Текушая масса корма
      * @var
      */
-    protected $weightOfFeed = 0;
+    protected $weightOfFeed;
 
     public function __construct($weightOfFeed)
     {
