@@ -25,7 +25,6 @@ class OutOfBox
      */
     public function add(Animal $animal)
     {
-        $animal->setInBox(false);
         array_push($this->storageOfPetOut,$animal);
 
         return true;

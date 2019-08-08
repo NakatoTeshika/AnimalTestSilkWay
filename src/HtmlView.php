@@ -15,9 +15,9 @@ class HtmlView extends View
      */
     public function view(BoxPresenter $boxPresenter, OutOfBoxPresenter $outOfBoxPresenter)
     {
-        echo '<body background="https://img5.goodfon.ru/wallpaper/nbig/5/c0/koshki-sobaki-shchenki-kotiata-chetvero-belyi-fon.jpg">';
+        echo '<link rel="stylesheet" href="/css/style.css">';
         echo '<center>';
-        echo '<em><h2 style="color: peru">Зверюшки</h2></em>';
+        echo '<h2 style="color: peru">Зверюшки</h2>';
         echo '<table border="2" bgcolor="#f5f5dc">';
         echo '<tr><td>' . $boxPresenter->animalCount() . '</td></tr>';
         echo '<tr><td>' . $outOfBoxPresenter->animalCount() . '</td></tr>';
@@ -34,7 +34,8 @@ class HtmlView extends View
         echo '<tr><td>' . $boxPresenter->spaceForCat() . '</td></tr>';
         echo '<tr><td>' . $boxPresenter->spaceForDog() . '</td></tr>';
         echo '<tr><td>' . $boxPresenter->messageClear() . '</td></tr>';
-        echo '</table></center>';
+        echo '</table>';
+        echo '</center>';
         echo '</body>';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Config;
 use App\Interfaces\IFactory;
 use App\Feed;
 
@@ -17,7 +18,7 @@ class FoodFactory implements IFactory
         $feed = [];
 
         while ($parameter>0) {
-            $weightOfFeed = 150;
+            $weightOfFeed = Config::get('weightOfFeed');
 
             array_push($feed, new Feed($weightOfFeed));
 

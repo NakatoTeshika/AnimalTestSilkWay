@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Config;
 use App\Dog;
 use App\Interfaces\IFactory;
 
@@ -15,18 +16,18 @@ class DogFactory implements IFactory
     static public function create($parameter)
     {
         $dogs            = array();
-        $name            = ["Тайсон", "Цезарь", "Джек", "Умка", "Робин", "Шарик", "Жучка", "Барон","Дружок"];
-        $species         = ["Шпиц", "Пудель","Лайка","Чихуахуа", "Терьер", "Мопс","Лабрадор","Овчарка","Бульдог","Такса"];
-        $genders         = ["ж","м"];
-        $animalColour    = ["белый", "черный", "серый", "рыжий"];
+        $name            = Config::get('dogsName');
+        $species         = Config::get('dogsSpecies');
+        $genders         = Config::get('animalGender');
+        $animalColour    = Config::get('animalColour');
+        $dogMaxLevelFood = Config::get('dogsMaxLevelFood');
+        $dogAge          = Config::get('dogsAge');
+        $dogVolume       = Config::get('dogsVolume');
         $limitPuppy      = $parameter;
         $dogName         = $name[array_rand($name, 1)];
         $dogSpecies      = $species[array_rand($species,1)];
         $dogGender       = $genders[array_rand($genders, 1)];
         $dogColour       = $animalColour[array_rand($animalColour,1)];
-        $dogMaxLevelFood = rand(150,250);
-        $dogAge          = rand(1,15);
-        $dogVolume       = rand(500, 1000);
 
         while ($limitPuppy>0) {
             array_push($dogs, new Dog($dogName ,  $dogSpecies , $dogGender, $dogColour,
