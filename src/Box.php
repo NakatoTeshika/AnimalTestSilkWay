@@ -98,17 +98,22 @@ class Box
         }
     }
 
+    public function total()
+    {
+        array_reduce($this->wasteBox,  function ($val1,$val2) {
+            $val1 += $val2->getWeightOfWaste()->getWeightOfFeed();
+
+            return $val1;
+        });
+    }
+
     /**
      * Определитель для уборки коробки: когда убраться в коробке
      * @return bool
      */
     public function animalWaste()
     {
-       if(array_reduce($this->wasteBox,  function ($val1,$val2) {
-               $val1 += $val2->getWeightOfWaste()->getWeightOfFeed();
-
-               return $val1;
-           }) > self::$WASTE) {
+       if( $this->total() > self::$WASTE) {
             return true;
         } else {
            return false;
