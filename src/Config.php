@@ -30,7 +30,6 @@ class Config
      */
     public static function get($key)
     {
-
         $value = isset(self::getConfig()[$key]) ? self::getConfig()[$key] : null;
 
         return $value;
