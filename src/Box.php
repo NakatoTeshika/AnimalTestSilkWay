@@ -98,6 +98,9 @@ class Box
         }
     }
 
+    /**
+     * Возвращает тотал экскрементов
+     */
     public function total()
     {
         array_reduce($this->wasteBox,  function ($val1,$val2) {
