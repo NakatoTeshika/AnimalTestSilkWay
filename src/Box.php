@@ -215,7 +215,7 @@ class Box
 
         if ($this->volumeOfBox - $this->currentSpace < $this->volumeOfBox && Dog::class) {
             $howDogsFit = $this->volumeOfBox - $this->currentSpace;
-            $howDogsFit =$howDogsFit / 1100;
+            $howDogsFit =$howDogsFit / 1000;
         }
         return $howDogsFit;
     }
@@ -230,7 +230,7 @@ class Box
 
         if ($this->volumeOfBox - $this->currentSpace < $this->volumeOfBox && Cat::class) {
             $howCatsFit = $this->volumeOfBox - $this->currentSpace;
-            $howCatsFit = $howCatsFit / 1000;
+            $howCatsFit = $howCatsFit / 500;
         }
         return $howCatsFit;
     }
